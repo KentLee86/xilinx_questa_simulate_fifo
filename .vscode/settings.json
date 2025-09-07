@@ -1,0 +1,32 @@
+{
+    "files.associations": {
+        "*.v": "verilog",
+        "*.vh": "verilog",
+        "*.sv": "systemverilog",
+        "*.svh": "systemverilog",
+        "*.vcd": "vcd"
+    },
+    "verilog.linting.linter": "xvlog",
+    "verilog.linting.path": "/tools/Xilinx/2025.1/Vivado/bin/xvlog",
+    "verilog.ctags.path": "/usr/bin/ctags",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "files.exclude": {
+        "**/xsim.dir": true,
+        "**/.Xil": true,
+        "**/vivado_project": true,
+        "**/*.jou": true,
+        "**/*.log": true,
+        "**/*.pb": true,
+        "**/webtalk*": true
+    },
+    "search.exclude": {
+        "**/xsim.dir": true,
+        "**/.Xil": true,
+        "**/vivado_project": true,
+        "**/*.jou": true,
+        "**/*.log": true,
+        "**/*.pb": true,
+        "**/webtalk*": true
+    }
+}

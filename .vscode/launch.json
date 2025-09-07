@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Verilog 시뮬레이션 실행",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/.bin/echo",
+            "args": ["시뮬레이션 완료"],
+            "preLaunchTask": "Verilog: 시뮬레이션 실행",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "noDebug": true,
+            "stopOnEntry": false
+        }
+    ]
+}

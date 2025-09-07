@@ -1,0 +1,247 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Verilog: 시뮬레이션 실행",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "sim"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: 안전한 시뮬레이션 실행",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "sim-alt"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: 파형 뷰어로 시뮬레이션",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "wave"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: Vivado GUI 시뮬레이션",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "gui"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: Vivado 배치 모드 시뮬레이션",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "batch"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: 문법 체크",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "check"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: GTKWave 파형 보기",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": ["make", "gtkwave"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Verilog: 정리",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Xilinx: 환경 설정 확인",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

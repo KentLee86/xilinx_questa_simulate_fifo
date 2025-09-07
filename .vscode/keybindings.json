@@ -1,0 +1,27 @@
+[
+    {
+        "key": "ctrl+f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Verilog: 시뮬레이션 실행"
+    },
+    {
+        "key": "ctrl+shift+f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Verilog: 안전한 시뮬레이션 실행"
+    },
+    {
+        "key": "ctrl+f6",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Verilog: 파형 뷰어로 시뮬레이션"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Verilog: 문법 체크"
+    },
+    {
+        "key": "ctrl+shift+delete",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Verilog: 정리"
+    }
+]

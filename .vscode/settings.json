@@ -17,7 +17,10 @@
         "**/vivado_project": true,
         "**/*.jou": true,
         "**/*.pb": true,
+        "**/__pycache__": true,
+        "**/*.wlf": true,
         "**/webtalk*": true
+
     },
     "search.exclude": {
         "**/xsim.dir": true,

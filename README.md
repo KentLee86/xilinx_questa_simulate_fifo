@@ -15,7 +15,7 @@ fpga_vsim_cli_test/
 
 ## 필요 조건
 
-- Xilinx Vivado (2019.1 이상 권장)
+- Xilinx Vivado (2025.1 권장)
 - Linux 환경
 - Make 유틸리티
 - Bash shell
@@ -33,6 +33,90 @@ export DISPLAY=localhost:11
 ```bash
 ./setup_env.sh
 ```
+
+## Questa/ModelSim 시뮬레이션 (sim 폴더)
+
+이 프로젝트는 Vivado 외에도 Questa/ModelSim을 사용한 시뮬레이션도 지원합니다.
+
+### sim_fifo_example 폴더의 Questa 시뮬레이션
+
+`sim_fifo_example/vivado/sim_fifo_example.sim/sim_1/behav/questa/` 폴더에서 Questa 시뮬레이션을 실행할 수 있습니다.
+
+#### 사용법
+
+```bash
+cd sim_fifo_example/vivado/sim_fifo_example.sim/sim_1/behav/questa/
+
+# 배치 모드 시뮬레이션 (기본값)
+./run.sh
+./run.sh sim
+
+# GUI 모드 시뮬레이션
+./run.sh sim-gui
+```
+
+#### 옵션 설명
+
+- **`sim`** (기본값): 배치 모드로 시뮬레이션 실행
+  - 시뮬레이션 완료 후 자동으로 종료 (`quit` 포함)
+  - 백그라운드 실행에 적합
+  - 명령어: `vsim -c -do "do run.do; quit"`
+
+- **`sim-gui`**: GUI 모드로 시뮬레이션 실행
+  - 파형 뷰어와 대화형 인터페이스 제공
+  - 시뮬레이션 후 Questa GUI에서 추가 분석 가능
+  - 명령어: `vsim -do "do run.do"`
+
+#### 시뮬레이션 스크립트 구조
+
+```
+questa/
+├── run.sh                           # 메인 실행 스크립트
+├── run.do                          # 전체 시뮬레이션 흐름
+├── tb_axis_fifo_example_compile.do # 컴파일 스크립트
+├── tb_axis_fifo_example_elaborate.do # 정교화 스크립트
+└── tb_axis_fifo_example_simulate.do  # 시뮬레이션 스크립트
+```
+
+#### 시뮬레이션 흐름
+
+1. **컴파일**: 소스 파일들을 컴파일
+2. **정교화**: 디자인 최적화 및 준비
+3. **시뮬레이션**: 실제 시뮬레이션 실행
+   - 파형 자동 로드
+   - 10000ns 동안 실행
+
+#### GUI 모드 기능
+
+GUI 모드에서는 다음 기능들을 사용할 수 있습니다:
+
+- **파형 뷰어**: 신호 파형 실시간 확인
+- **구조 뷰**: 모듈 계층 구조 탐색
+- **신호 뷰**: 모든 신호 목록 확인
+- **대화형 명령**: 추가 시뮬레이션 명령 실행 가능
+
+#### 예제 사용법
+
+```bash
+# 빠른 검증 (배치 모드)
+./run.sh sim
+
+# 상세한 분석 (GUI 모드)
+./run.sh sim-gui
+
+# 도움말 보기
+./run.sh help
+```
+
+### 다른 sim 폴더들
+
+프로젝트의 다른 sim 폴더들도 비슷한 패턴을 따릅니다:
+
+- `a/`: D 플립플롭 시뮬레이션 (Questa Makefile 기반)
+- `adder/`: 가산기 시뮬레이션 (Questa TCL 기반)
+- `sim_sync_adder/`: 동기 가산기 시뮬레이션 (Vivado xsim 기반)
+
+각 폴더의 README 또는 Makefile을 참조하여 해당 시뮬레이션을 실행하세요.
 
 ## 동기 가산기 모듈 설명
 
@@ -186,6 +270,7 @@ parameter CLK_PERIOD = 5; // 200MHz (5ns 주기)
 
 ### 추가 테스트 케이스
 테스트벤치에 새로운 테스트 케이스를 추가하여 더 많은 시나리오를 검증할 수 있습니다.
+
 
 ## 참고사항
 

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_axis_fifo_example_sim.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_axis_fifo_example" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,644.001 ns"></ZoomEndTime>
+      <Cursor1Time time="444.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="116"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/aclk">
+      <obj_property name="ElementShortName">aclk</obj_property>
+      <obj_property name="ObjectShortName">aclk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/aresetn">
+      <obj_property name="ElementShortName">aresetn</obj_property>
+      <obj_property name="ObjectShortName">aresetn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/s_tvalid">
+      <obj_property name="ElementShortName">s_tvalid</obj_property>
+      <obj_property name="ObjectShortName">s_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/s_tready">
+      <obj_property name="ElementShortName">s_tready</obj_property>
+      <obj_property name="ObjectShortName">s_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/s_tlast">
+      <obj_property name="ElementShortName">s_tlast</obj_property>
+      <obj_property name="ObjectShortName">s_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/s_tdata">
+      <obj_property name="ElementShortName">s_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/s_tkeep">
+      <obj_property name="ElementShortName">s_tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">s_tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/s_tuser">
+      <obj_property name="ElementShortName">s_tuser[0:0]</obj_property>
+      <obj_property name="ObjectShortName">s_tuser[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/m_tvalid">
+      <obj_property name="ElementShortName">m_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/m_tready">
+      <obj_property name="ElementShortName">m_tready</obj_property>
+      <obj_property name="ObjectShortName">m_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/m_tlast">
+      <obj_property name="ElementShortName">m_tlast</obj_property>
+      <obj_property name="ObjectShortName">m_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/m_tdata">
+      <obj_property name="ElementShortName">m_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/m_tkeep">
+      <obj_property name="ElementShortName">m_tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">m_tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/m_tuser">
+      <obj_property name="ElementShortName">m_tuser[0:0]</obj_property>
+      <obj_property name="ObjectShortName">m_tuser[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/DATA_W">
+      <obj_property name="ElementShortName">DATA_W[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_W[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/KEEP_W">
+      <obj_property name="ElementShortName">KEEP_W[31:0]</obj_property>
+      <obj_property name="ObjectShortName">KEEP_W[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/USER_W">
+      <obj_property name="ElementShortName">USER_W[31:0]</obj_property>
+      <obj_property name="ObjectShortName">USER_W[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/FRAME_BEATS">
+      <obj_property name="ElementShortName">FRAME_BEATS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FRAME_BEATS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group44">
+      <obj_property name="label">Source</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_src/m_axis_tvalid">
+         <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_src/m_axis_tready">
+         <obj_property name="ElementShortName">m_axis_tready</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/m_axis_tdata">
+         <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/m_axis_tkeep">
+         <obj_property name="ElementShortName">m_axis_tkeep[3:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tkeep[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_src/m_axis_tlast">
+         <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/m_axis_tuser">
+         <obj_property name="ElementShortName">m_axis_tuser[0:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tuser[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/beat_cnt">
+         <obj_property name="ElementShortName">beat_cnt[31:0]</obj_property>
+         <obj_property name="ObjectShortName">beat_cnt[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/frame_id">
+         <obj_property name="ElementShortName">frame_id[31:0]</obj_property>
+         <obj_property name="ObjectShortName">frame_id[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/DATA_W">
+         <obj_property name="ElementShortName">DATA_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/KEEP_W">
+         <obj_property name="ElementShortName">KEEP_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">KEEP_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/USER_W">
+         <obj_property name="ElementShortName">USER_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">USER_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_src/FRAME_BEATS">
+         <obj_property name="ElementShortName">FRAME_BEATS[31:0]</obj_property>
+         <obj_property name="ObjectShortName">FRAME_BEATS[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group63">
+      <obj_property name="label">FIFO</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/s_axis_tvalid">
+         <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/s_axis_tready">
+         <obj_property name="ElementShortName">s_axis_tready</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/s_axis_tdata">
+         <obj_property name="ElementShortName">s_axis_tdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/s_axis_tkeep">
+         <obj_property name="ElementShortName">s_axis_tkeep[3:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tkeep[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/s_axis_tlast">
+         <obj_property name="ElementShortName">s_axis_tlast</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tlast</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/s_axis_tuser">
+         <obj_property name="ElementShortName">s_axis_tuser[0:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tuser[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/m_axis_tvalid">
+         <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/m_axis_tready">
+         <obj_property name="ElementShortName">m_axis_tready</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/m_axis_tdata">
+         <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/m_axis_tkeep">
+         <obj_property name="ElementShortName">m_axis_tkeep[3:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tkeep[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/m_axis_tlast">
+         <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/m_axis_tuser">
+         <obj_property name="ElementShortName">m_axis_tuser[0:0]</obj_property>
+         <obj_property name="ObjectShortName">m_axis_tuser[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/prog_full">
+         <obj_property name="ElementShortName">prog_full</obj_property>
+         <obj_property name="ObjectShortName">prog_full</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/prog_empty">
+         <obj_property name="ElementShortName">prog_empty</obj_property>
+         <obj_property name="ObjectShortName">prog_empty</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/DATA_W">
+         <obj_property name="ElementShortName">DATA_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/KEEP_W">
+         <obj_property name="ElementShortName">KEEP_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">KEEP_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/USER_W">
+         <obj_property name="ElementShortName">USER_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">USER_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/DEPTH">
+         <obj_property name="ElementShortName">DEPTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DEPTH[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/rd_data_count_axis">
+         <obj_property name="ElementShortName">rd_data_count_axis[15:0]</obj_property>
+         <obj_property name="ObjectShortName">rd_data_count_axis[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/wr_data_count_axis">
+         <obj_property name="ElementShortName">wr_data_count_axis[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_data_count_axis[15:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group31">
+      <obj_property name="label">Sink</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_sink/s_axis_tvalid">
+         <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_sink/s_axis_tready">
+         <obj_property name="ElementShortName">s_axis_tready</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/s_axis_tdata">
+         <obj_property name="ElementShortName">s_axis_tdata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tdata[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/s_axis_tkeep">
+         <obj_property name="ElementShortName">s_axis_tkeep[3:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tkeep[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_sink/s_axis_tlast">
+         <obj_property name="ElementShortName">s_axis_tlast</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tlast</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/s_axis_tuser">
+         <obj_property name="ElementShortName">s_axis_tuser[0:0]</obj_property>
+         <obj_property name="ObjectShortName">s_axis_tuser[0:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/rdy_div">
+         <obj_property name="ElementShortName">rdy_div[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rdy_div[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/beat_rcv">
+         <obj_property name="ElementShortName">beat_rcv[31:0]</obj_property>
+         <obj_property name="ObjectShortName">beat_rcv[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/frame_rcv">
+         <obj_property name="ElementShortName">frame_rcv[31:0]</obj_property>
+         <obj_property name="ObjectShortName">frame_rcv[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/DATA_W">
+         <obj_property name="ElementShortName">DATA_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/KEEP_W">
+         <obj_property name="ElementShortName">KEEP_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">KEEP_W[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_sink/USER_W">
+         <obj_property name="ElementShortName">USER_W[31:0]</obj_property>
+         <obj_property name="ObjectShortName">USER_W[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group75">
+      <obj_property name="label">FIFO_INTERNAL</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="group" fp_name="group85">
+         <obj_property name="label">Slave</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tvalid">
+            <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tready">
+            <obj_property name="ElementShortName">s_axis_tready</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tready</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tdata">
+            <obj_property name="ElementShortName">s_axis_tdata[31:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tdata[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tstrb">
+            <obj_property name="ElementShortName">s_axis_tstrb[3:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tstrb[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tkeep">
+            <obj_property name="ElementShortName">s_axis_tkeep[3:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tkeep[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tlast">
+            <obj_property name="ElementShortName">s_axis_tlast</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tlast</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tid">
+            <obj_property name="ElementShortName">s_axis_tid[0:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tid[0:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tdest">
+            <obj_property name="ElementShortName">s_axis_tdest[0:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tdest[0:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/s_axis_tuser">
+            <obj_property name="ElementShortName">s_axis_tuser[0:0]</obj_property>
+            <obj_property name="ObjectShortName">s_axis_tuser[0:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group86">
+         <obj_property name="label">Master</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tvalid">
+            <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tready">
+            <obj_property name="ElementShortName">m_axis_tready</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tdata">
+            <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tstrb">
+            <obj_property name="ElementShortName">m_axis_tstrb[3:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tstrb[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tkeep">
+            <obj_property name="ElementShortName">m_axis_tkeep[3:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tkeep[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tlast">
+            <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tid">
+            <obj_property name="ElementShortName">m_axis_tid[0:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tid[0:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tdest">
+            <obj_property name="ElementShortName">m_axis_tdest[0:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tdest[0:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/tb_axis_fifo_example/dut/u_fifo/u_xpm_fifo_axis/m_axis_tuser">
+            <obj_property name="ElementShortName">m_axis_tuser[0:0]</obj_property>
+            <obj_property name="ObjectShortName">m_axis_tuser[0:0]</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+</wave_config>

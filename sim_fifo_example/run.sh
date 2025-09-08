@@ -56,6 +56,12 @@ elif [ "$SIMULATOR" = "xsim" ]; then
     VSIM="xsim"
     VLIB=""  # xsim은 라이브러리 생성이 필요 없음
     XELAB="xelab"
+
+    # Xilinx XPM 라이브러리 경로 설정
+    XPM_FIFO_PATH="/tools/Xilinx/2025.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv"
+    XPM_CDC_PATH="/tools/Xilinx/2025.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv"
+    XPM_MEMORY_PATH="/tools/Xilinx/2025.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv"
+    GLBL_PATH="/tools/Xilinx/2025.1/data/verilog/src/glbl.v"
 fi
 
 # 파일 경로 설정
@@ -65,10 +71,10 @@ SIM_DIR="$PROJECT_DIR/sim_fifo_example"
 
 # 디자인 파일들
 DESIGN_FILES="\
-    $DESIGN_DIR/axis_fifo_example_top.v \
+    $SIM_DIR/axis_fifo_example_top.v \
     $DESIGN_DIR/axis_fifo_xpm.v \
-    $DESIGN_DIR/axis_counter_src.v \
-    $DESIGN_DIR/axis_sink_checker.v"
+    $SIM_DIR/axis_counter_src.v \
+    $SIM_DIR/axis_sink_checker.v"
 
 # 테스트벤치 파일
 TB_FILE="$SIM_DIR/tb_axis_fifo_example.sv"
@@ -101,7 +107,12 @@ fi
 # 문법 체크 모드
 if [ "$MODE" = "check" ]; then
     echo "문법 체크만 수행합니다..."
-    $VLOG -sv $DESIGN_FILES $TB_FILE
+    if [ "$SIMULATOR" = "xsim" ]; then
+        # XPM 라이브러리 포함해서 체크
+        $VLOG -sv -work xpm_lib --define SIMULATION $GLBL_PATH $XPM_CDC_PATH $XPM_MEMORY_PATH $XPM_FIFO_PATH $DESIGN_FILES $TB_FILE
+    else
+        $VLOG -sv $DESIGN_FILES $TB_FILE
+    fi
     if [ $? -eq 0 ]; then
         echo "문법 체크 통과!"
     else
@@ -115,6 +126,16 @@ echo "1. SystemVerilog/Verilog 파일 컴파일..."
 if [ "$SIMULATOR" = "questa" ]; then
     $VLOG -sv $DESIGN_FILES $TB_FILE
 elif [ "$SIMULATOR" = "xsim" ]; then
+    # XPM 라이브러리 파일들 먼저 컴파일
+    echo "  - XPM 라이브러리 컴파일..."
+    $VLOG -sv -work xpm_lib --define SIMULATION --relax $GLBL_PATH $XPM_CDC_PATH $XPM_MEMORY_PATH $XPM_FIFO_PATH
+    if [ $? -ne 0 ]; then
+        echo "XPM 라이브러리 컴파일 실패!"
+        exit 1
+    fi
+
+    # 디자인 파일들 컴파일
+    echo "  - 디자인 파일들 컴파일..."
     $VLOG -sv $DESIGN_FILES $TB_FILE
 fi
 if [ $? -ne 0 ]; then
@@ -125,7 +146,7 @@ fi
 # xsim의 경우 엘라보레이션 단계 추가
 if [ "$SIMULATOR" = "xsim" ]; then
     echo "2. 디자인 엘라보레이션..."
-    $XELAB -debug typical $TOP_MODULE -s ${TOP_MODULE}_sim
+    $XELAB -debug typical -L xpm_lib --define SIMULATION --relax $TOP_MODULE xpm_lib.glbl -s ${TOP_MODULE}_sim
     if [ $? -ne 0 ]; then
         echo "엘라보레이션 실패!"
         exit 1

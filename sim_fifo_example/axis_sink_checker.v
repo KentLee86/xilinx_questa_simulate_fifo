@@ -31,7 +31,8 @@ module axis_sink_checker #(
         end else begin
             rdy_div <= rdy_div + 1;
             // 1/2 duty로 backpressure (테스트 목적)
-            s_axis_tready <= rdy_div[0];
+            // s_axis_tready <= rdy_div[0];
+            s_axis_tready <= 1;
 
             if (s_axis_tvalid && s_axis_tready) begin
                 beat_rcv <= beat_rcv + 1;

@@ -21,6 +21,15 @@ module axis_fifo_example_top #(
     wire [KEEP_W-1:0]      m_tkeep;
     wire [USER_W-1:0]      m_tuser;
 
+    // Wait done signal from counter source
+    wire                   wait_done;
+
+    // Internal tready from sink checker
+    wire                   sink_tready;
+
+    // Delayed wait_done for 2 clock cycles
+    reg [1:0]              wait_done_delay;
+
     // 1) 프레임 생성기(소스)
     axis_counter_src #(
         .DATA_W(DATA_W),
@@ -35,7 +44,8 @@ module axis_fifo_example_top #(
         .m_axis_tdata (s_tdata ),
         .m_axis_tkeep (s_tkeep ),
         .m_axis_tlast (s_tlast ),
-        .m_axis_tuser (s_tuser )
+        .m_axis_tuser (s_tuser ),
+        .wait_done(wait_done)
     );
 
     // 2) Xilinx XPM FIFO (AXIS)
@@ -75,11 +85,23 @@ module axis_fifo_example_top #(
         .aclk(aclk),
         .aresetn(aresetn),
         .s_axis_tvalid(m_tvalid),
-        .s_axis_tready(m_tready),
+        .s_axis_tready(sink_tready),
         .s_axis_tdata (m_tdata ),
         .s_axis_tkeep (m_tkeep ),
         .s_axis_tlast (m_tlast ),
         .s_axis_tuser (m_tuser )
     );
+
+    // 2-clock delay logic for wait_done
+    always @(posedge aclk) begin
+        if (!aresetn) begin
+            wait_done_delay <= 2'b00;
+        end else begin
+            wait_done_delay <= {wait_done_delay[0], ~wait_done};
+        end
+    end
+
+    // Conditional tready logic: m_tready = sink_tready when wait_done goes low after 2 clocks
+    assign m_tready = wait_done_delay[1] ? sink_tready : 1'b0;
 
 endmodule

@@ -30,29 +30,25 @@ module axis_fifo_xpm #(
 );
 
   xpm_fifo_axis #(
-    // ========== 기본 설정 ==========
-    .CDC_SYNC_STAGES         (2),                       // CDC 동기 스테이지
-    .CLOCKING_MODE           ("common_clock"),          // 공용 클럭
-    .ECC_MODE                ("no_ecc"),                // "no_ecc"|"en_ecc"
-    .FIFO_DEPTH              (DEPTH),                   // 엔트리 수 (비트/바이트 아님)
-    .FIFO_MEMORY_TYPE        ("auto"),                  // "auto"|"block"|"distributed"|"ultra"
-    .PACKET_FIFO             ("true"),                  // TLAST 기반 패킷 보존
-    .PROG_EMPTY_THRESH       (8),                       // 필요 시 조정
-    .PROG_FULL_THRESH        (DEPTH-8),                 // 필요 시 조정
-    .RD_DATA_COUNT_WIDTH     (16),
-    .WR_DATA_COUNT_WIDTH     (16),
-
-    // ========== AXIS 폭 ==========
-    .TDATA_WIDTH             (DATA_W),
-    .TDEST_WIDTH             (0),
-    .TID_WIDTH               (0),
-    // .TKEEP_WIDTH             (KEEP_W),
-    // .TLAST_ENABLE            (1),
-    // .TSTRB_WIDTH             (0),
-    .TUSER_WIDTH             (USER_W),
-
-    // ========== 시뮬 보조 ==========
-    .SIM_ASSERT_CHK          (0)
+    // ========== 기본 설정 ==========   .CASCADE_HEIGHT(0),             // DECIMAL
+   .CDC_SYNC_STAGES(2),            // DECIMAL
+   .CLOCKING_MODE("common_clock"), // String
+   .ECC_MODE("no_ecc"),            // String
+   .EN_SIM_ASSERT_ERR("warning"),  // String
+   .FIFO_DEPTH(2048),              // DECIMAL
+   .FIFO_MEMORY_TYPE("auto"),      // String
+   .PACKET_FIFO("false"),          // String
+   .PROG_EMPTY_THRESH(10),         // DECIMAL
+   .PROG_FULL_THRESH(10),          // DECIMAL
+   .RD_DATA_COUNT_WIDTH(1),        // DECIMAL
+   .RELATED_CLOCKS(0),             // DECIMAL
+   .SIM_ASSERT_CHK(0),             // DECIMAL; 0=disable simulation messages, 1=enable simulation messages
+   .TDATA_WIDTH(32),               // DECIMAL
+   .TDEST_WIDTH(1),                // DECIMAL
+   .TID_WIDTH(1),                  // DECIMAL
+   .TUSER_WIDTH(1),                // DECIMAL
+   .USE_ADV_FEATURES("1000"),      // String
+   .WR_DATA_COUNT_WIDTH(1)         // DECIMAL
   ) u_xpm_fifo_axis (
     .s_aresetn               (aresetn),
     .s_aclk                  (aclk),
@@ -73,8 +69,8 @@ module axis_fifo_xpm #(
     .m_axis_tlast            (m_axis_tlast),
     .m_axis_tuser            (m_axis_tuser),
     .m_axis_tstrb            (/*unused*/),
-    .m_axis_tid              (/*unused*/),
-    .m_axis_tdest            (/*unused*/),
+    // .m_axis_tid              (/*unused*/),
+    // .m_axis_tdest            (/*unused*/),
 
     // 상태 핀(옵션)
     .prog_full_axis               (prog_full),
@@ -83,6 +79,10 @@ module axis_fifo_xpm #(
     // .rd_data_count           (),        // 비AXIS 카운트(미사용)
     .wr_data_count_axis      (),        // AXIS 기준 write 카운트
     .rd_data_count_axis      (),        // AXIS 기준 read 카운트
+
+
+    .injectsbiterr_axis(1'b0),
+    .injectdbiterr_axis(1'b0),
 
     // 비동기 모드에서만 쓰는 포트 (common_clock에서는 미사용)
     .m_aclk                  (1'b0)

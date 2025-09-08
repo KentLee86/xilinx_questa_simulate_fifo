@@ -2,6 +2,10 @@
 
 이 프로젝트는 CLI에서 Xilinx Vivado를 이용하여 Verilog 시뮬레이션을 실행하는 기본 예제입니다. 8비트 동기 가산기를 구현하고 테스트합니다.
 
+
+Questa 설정은 **[Questa 설정 방법](docs/questa.md)** 을 참고합니다.
+
+
 ## 파일 구조
 
 ```

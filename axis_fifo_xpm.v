@@ -2,7 +2,7 @@
 module axis_fifo_xpm #(
     parameter integer DATA_W = 32,
     parameter integer KEEP_W = (DATA_W/8),
-    parameter integer USER_W = 1,
+    parameter integer USER_W = 0,
     parameter integer DEPTH  = 1024
 )(
     input  wire                 aclk,
@@ -14,7 +14,7 @@ module axis_fifo_xpm #(
     input  wire [DATA_W-1:0]    s_axis_tdata,
     input  wire [KEEP_W-1:0]    s_axis_tkeep,
     input  wire                 s_axis_tlast,
-    input  wire [USER_W-1:0]    s_axis_tuser,
+    input  wire [(USER_W > 0 ? USER_W-1 : 0):0]    s_axis_tuser,
 
     // m_axis
     output wire                 m_axis_tvalid,
@@ -22,7 +22,7 @@ module axis_fifo_xpm #(
     output wire [DATA_W-1:0]    m_axis_tdata,
     output wire [KEEP_W-1:0]    m_axis_tkeep,
     output wire                 m_axis_tlast,
-    output wire [USER_W-1:0]    m_axis_tuser,
+    output wire [(USER_W > 0 ? USER_W-1 : 0):0]    m_axis_tuser,
 
     // 선택: 상태/임계치
     output wire                 prog_full,
@@ -35,7 +35,7 @@ module axis_fifo_xpm #(
    .CLOCKING_MODE("common_clock"), // String
    .ECC_MODE("no_ecc"),            // String
    .EN_SIM_ASSERT_ERR("warning"),  // String
-   .FIFO_DEPTH(2048),              // DECIMAL
+   .FIFO_DEPTH(DEPTH),              // DECIMAL
    .FIFO_MEMORY_TYPE("auto"),      // String
    .PACKET_FIFO("false"),          // String
    .PROG_EMPTY_THRESH(10),         // DECIMAL
@@ -43,10 +43,10 @@ module axis_fifo_xpm #(
    .RD_DATA_COUNT_WIDTH(1),        // DECIMAL
    .RELATED_CLOCKS(0),             // DECIMAL
    .SIM_ASSERT_CHK(0),             // DECIMAL; 0=disable simulation messages, 1=enable simulation messages
-   .TDATA_WIDTH(32),               // DECIMAL
+   .TDATA_WIDTH(DATA_W),               // DECIMAL
    .TDEST_WIDTH(1),                // DECIMAL
    .TID_WIDTH(1),                  // DECIMAL
-   .TUSER_WIDTH(1),                // DECIMAL
+   .TUSER_WIDTH(USER_W),           // DECIMAL
    .USE_ADV_FEATURES("1000"),      // String
    .WR_DATA_COUNT_WIDTH(1)         // DECIMAL
   ) u_xpm_fifo_axis (

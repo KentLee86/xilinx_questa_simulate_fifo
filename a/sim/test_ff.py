@@ -9,25 +9,14 @@ from cocotb.triggers import RisingEdge, FallingEdge, Timer, ClockCycles
 from cocotb.result import TestFailure
 import random
 
-# Global clock instance to avoid multiple clock drivers
-_clock_started = False
-
-async def setup_clock(dut):
-    """Setup clock if not already started"""
-    global _clock_started
-    if not _clock_started:
-        clock = Clock(dut.clk, 10, units="ns")  # 100MHz clock
-        cocotb.start_soon(clock.start())
-        _clock_started = True
-        await Timer(1, units="ns")  # Small delay to let clock start
-
 
 @cocotb.test()
 async def test_ff_reset(dut):
     """Test asynchronous reset functionality"""
 
-    # Start the clock (only once)
-    await setup_clock(dut)
+    # Start the clock
+    clock = Clock(dut.clk, 10, units="ns")  # 100MHz clock
+    cocotb.start_soon(clock.start())
 
     # Test asynchronous reset
     dut.rst.value = 1
@@ -43,8 +32,9 @@ async def test_ff_reset(dut):
 async def test_ff_basic_operation(dut):
     """Test basic D flip-flop operation"""
 
-    # Start the clock (only once)
-    await setup_clock(dut)
+    # Start the clock
+    clock = Clock(dut.clk, 10, units="ns")  # 100MHz clock
+    cocotb.start_soon(clock.start())
 
     # Reset the DUT
     dut.rst.value = 1
@@ -78,8 +68,9 @@ async def test_ff_basic_operation(dut):
 async def test_ff_random_data(dut):
     """Test D flip-flop with random data patterns"""
 
-    # Start the clock (only once)
-    await setup_clock(dut)
+    # Start the clock
+    clock = Clock(dut.clk, 10, units="ns")
+    cocotb.start_soon(clock.start())
 
     # Reset the DUT
     dut.rst.value = 1
@@ -107,8 +98,9 @@ async def test_ff_random_data(dut):
 async def test_ff_reset_during_operation(dut):
     """Test reset assertion during normal operation"""
 
-    # Start the clock (only once)
-    await setup_clock(dut)
+    # Start the clock
+    clock = Clock(dut.clk, 10, units="ns")
+    cocotb.start_soon(clock.start())
 
     # Reset and start normal operation
     dut.rst.value = 1
@@ -139,8 +131,9 @@ async def test_ff_reset_during_operation(dut):
 async def test_ff_setup_hold_timing(dut):
     """Test setup and hold time requirements (basic timing test)"""
 
-    # Start the clock (only once)
-    await setup_clock(dut)
+    # Start the clock
+    clock = Clock(dut.clk, 10, units="ns")
+    cocotb.start_soon(clock.start())
 
     # Reset the DUT
     dut.rst.value = 1
@@ -166,8 +159,9 @@ async def test_ff_setup_hold_timing(dut):
 async def test_ff_comprehensive(dut):
     """Comprehensive test combining all scenarios"""
 
-    # Start the clock (only once)
-    await setup_clock(dut)
+    # Start the clock
+    clock = Clock(dut.clk, 10, units="ns")
+    cocotb.start_soon(clock.start())
 
     dut._log.info("Starting comprehensive D flip-flop test")
 

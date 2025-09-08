@@ -22,10 +22,10 @@ help:
 	@echo "  make clean          - 생성된 파일 정리"
 	@echo "  make help           - 이 도움말 보기"
 
-# 소스 파일 컴파일
+# 소스 파일 컴파일 (디버그 정보 포함)
 compile: $(WORK_DIR)
 	@echo "=== 소스 파일 컴파일 중 ==="
-	vlog -work $(WORK_DIR) +incdir+. $(SRC_FILES)
+	vlog -64 +define+DEBUG -work $(WORK_DIR) +incdir+. $(SRC_FILES)
 
 # 작업 라이브러리 생성
 $(WORK_DIR):
@@ -42,10 +42,11 @@ sim: compile
 		echo "GTKWave로 보려면: make view_wave"; \
 	fi
 
-# GUI 모드 시뮬레이션
+# GUI 모드 시뮬레이션 (디버그 모드)
 gui: compile
 	@echo "=== GUI 모드 시뮬레이션 실행 ==="
-	vsim -do run_ff_questa.tcl
+	@echo "디버그 정보와 브레이크포인트를 사용할 수 있습니다."
+	vsim -onfinish stop -do run_ff_questa.tcl
 
 # 대화형 GUI 모드 시뮬레이션 (파형 최적화)
 gui-interactive: compile

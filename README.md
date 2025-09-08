@@ -6,11 +6,33 @@
 
 ```
 fpga_vsim_cli_test/
-├── sync_adder.v      # 동기 가산기 메인 모듈
-├── tb_sync_adder.v   # 테스트벤치
-├── run_sim.tcl       # Vivado TCL 스크립트
-├── Makefile          # 빌드 자동화
-└── README.md         # 이 파일
+├── a/                          # D 플립플롭 시뮬레이션 (Questa)
+│   ├── ff.v                    # D 플립플롭 모듈
+│   ├── tb_ff.v                 # 테스트벤치
+│   ├── Makefile                # Questa 시뮬레이션 빌드
+│   └── *.tcl                   # TCL 스크립트들
+├── adder/                      # 가산기 시뮬레이션 (Questa)
+│   ├── sync_adder.v            # 동기 가산기 모듈
+│   ├── tb_sync_adder.v         # 테스트벤치
+│   └── *.tcl                   # TCL 스크립트들
+├── sim_fifo_example/           # AXIS FIFO 시뮬레이션
+│   ├── axis_fifo_example_top.v # FIFO 예제 탑 모듈
+│   ├── tb_axis_fifo_example.sv # SystemVerilog 테스트벤치
+│   ├── vivado/                 # Vivado 프로젝트
+│   │   └── sim_fifo_example.sim/sim_1/behav/questa/
+│   │       ├── run.sh          # 시뮬레이션 실행 스크립트 (sim/sim-gui)
+│   │       └── *.do            # Questa 시뮬레이션 스크립트들
+│   └── *.v                     # 기타 Verilog 소스들
+├── sim_sync_adder/             # 동기 가산기 시뮬레이션 (Vivado xsim)
+│   ├── tb/                     # 테스트벤치 폴더
+│   └── Makefile                # xsim 빌드 스크립트
+├── sync_adder.v                # 동기 가산기 메인 모듈
+├── tb_sync_adder.v             # 메인 테스트벤치
+├── axis_fifo_xmp.v             # AXIS FIFO XPM 모듈
+├── run_sim.tcl                 # Vivado TCL 스크립트
+├── setup_env.sh                # 환경 설정 스크립트
+├── Makefile                    # 메인 빌드 자동화
+└── README.md                   # 이 파일
 ```
 
 ## 필요 조건

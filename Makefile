@@ -32,11 +32,11 @@ batch:
 sim:
 	@echo "=== xsim을 이용한 직접 시뮬레이션 ==="
 	@echo "1. Verilog 파일 컴파일..."
-	$(XVLOG) $(DESIGN_FILES) $(TB_FILES)
+	$(XVLOG) $(DESIGN_FILES) $(TB_FILES) --nolog
 	@echo "2. 디자인 엘라보레이션..."
-	$(XELAB) -debug typical $(TOP_MODULE) -s $(TOP_MODULE)_sim
+	$(XELAB) -debug typical $(TOP_MODULE) -s $(TOP_MODULE)_sim --nolog
 	@echo "3. 시뮬레이션 실행..."
-	$(XSIM) $(TOP_MODULE)_sim -runall -testplusarg finish
+	$(XSIM) $(TOP_MODULE)_sim -runall -testplusarg finish --nolog
 
 # 파형 뷰어로 시뮬레이션 (GUI)
 wave:

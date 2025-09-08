@@ -19,6 +19,7 @@
         "**/*.pb": true,
         "**/__pycache__": true,
         "**/*.wlf": true,
+        "**/*.wdb": true,
         "**/webtalk*": true
 
     },

@@ -1,6 +1,7 @@
 """
 Dataover cocotb testbench
 Tests the dataover module using cocotb framework
+Now supports signed 32-bit comparisons
 """
 
 import cocotb
@@ -52,15 +53,15 @@ async def test_dataover_edge_cases(dut):
 
     dut._log.info("Starting edge cases test")
 
-    # Test case 1: Maximum 32-bit values
-    dut.data_in.value = 0xFFFFFFFF  # Maximum 32-bit unsigned
-    dut.threshold.value = 0xFFFFFFFE
+    # Test case 1: Maximum positive signed value
+    dut.data_in.value = 0x7FFFFFFF  # Maximum positive signed 32-bit
+    dut.threshold.value = 0x7FFFFFFE
     await Timer(10, units="ns")
 
     expected = 1
     actual = int(dut.data_over.value)
-    assert actual == expected, f"Max value test failed: data_in=0xFFFFFFFF, threshold=0xFFFFFFFE, expected={expected}, got={actual}"
-    dut._log.info("✓ Maximum value test passed")
+    assert actual == expected, f"Max positive test failed: data_in=0x7FFFFFFF, threshold=0x7FFFFFFE, expected={expected}, got={actual}"
+    dut._log.info("✓ Maximum positive value test passed")
 
     # Test case 2: Zero values
     dut.data_in.value = 0
@@ -103,9 +104,9 @@ async def test_dataover_random(dut):
     passed_tests = 0
 
     for i in range(test_count):
-        # Generate random 32-bit values
-        data_in = random.randint(0, 0xFFFFFFFF)
-        threshold = random.randint(0, 0xFFFFFFFF)
+        # Generate random signed 32-bit values
+        data_in = random.randint(-2147483648, 2147483647)
+        threshold = random.randint(-2147483648, 2147483647)
 
         dut.data_in.value = data_in
         dut.threshold.value = threshold
@@ -120,6 +121,131 @@ async def test_dataover_random(dut):
         passed_tests += 1
 
     dut._log.info(f"✓ Random test passed: {passed_tests}/{test_count} tests")
+
+
+@cocotb.test()
+async def test_dataover_signed_values(dut):
+    """Test with signed values including negative numbers"""
+
+    dut._log.info("Starting signed values test")
+
+    # Test case 1: Negative numbers
+    dut.data_in.value = -50
+    dut.threshold.value = -100
+    await Timer(10, units="ns")
+
+    expected = 1  # -50 > -100
+    actual = int(dut.data_over.value)
+    assert actual == expected, f"Negative test 1 failed: data_in=-50, threshold=-100, expected={expected}, got={actual}"
+    dut._log.info("✓ Negative test 1 passed: -50 > -100 -> data_over=1")
+
+    # Test case 2: Negative vs positive
+    dut.data_in.value = -10
+    dut.threshold.value = 10
+    await Timer(10, units="ns")
+
+    expected = 0  # -10 < 10
+    actual = int(dut.data_over.value)
+    assert actual == expected, f"Negative vs positive test failed: data_in=-10, threshold=10, expected={expected}, got={actual}"
+    dut._log.info("✓ Negative vs positive test passed: -10 < 10 -> data_over=0")
+
+    # Test case 3: Positive vs negative
+    dut.data_in.value = 10
+    dut.threshold.value = -10
+    await Timer(10, units="ns")
+
+    expected = 1  # 10 > -10
+    actual = int(dut.data_over.value)
+    assert actual == expected, f"Positive vs negative test failed: data_in=10, threshold=-10, expected={expected}, got={actual}"
+    dut._log.info("✓ Positive vs negative test passed: 10 > -10 -> data_over=1")
+
+    # Test case 4: Minimum signed value
+    dut.data_in.value = 0x80000000  # Most negative signed 32-bit (-2147483648)
+    dut.threshold.value = 0x80000001  # -2147483647
+    await Timer(10, units="ns")
+
+    expected = 0  # -2147483648 < -2147483647
+    actual = int(dut.data_over.value)
+    assert actual == expected, f"Minimum signed test failed: data_in=0x80000000, threshold=0x80000001, expected={expected}, got={actual}"
+    dut._log.info("✓ Minimum signed value test passed")
+
+    # Test case 5: Cross zero boundary
+    dut.data_in.value = 1
+    dut.threshold.value = -1
+    await Timer(10, units="ns")
+
+    expected = 1  # 1 > -1
+    actual = int(dut.data_over.value)
+    assert actual == expected, f"Cross zero test failed: data_in=1, threshold=-1, expected={expected}, got={actual}"
+    dut._log.info("✓ Cross zero boundary test passed: 1 > -1 -> data_over=1")
+
+
+@cocotb.test()
+async def test_dataover_negative_comprehensive(dut):
+    """Comprehensive test with various negative values"""
+
+    dut._log.info("Starting comprehensive negative values test")
+
+    # Test vectors: (data_in, threshold, expected_result, description)
+    negative_test_vectors = [
+        # Both negative, data_in > threshold
+        (-10, -20, 1, "-10 > -20"),
+        (-100, -200, 1, "-100 > -200"),
+        (-1000, -2000, 1, "-1000 > -2000"),
+        (-1, -2, 1, "-1 > -2"),
+
+        # Both negative, data_in < threshold
+        (-20, -10, 0, "-20 < -10"),
+        (-200, -100, 0, "-200 < -100"),
+        (-2000, -1000, 0, "-2000 < -1000"),
+        (-2, -1, 0, "-2 < -1"),
+
+        # Both negative, equal
+        (-50, -50, 0, "-50 = -50"),
+        (-1000, -1000, 0, "-1000 = -1000"),
+
+        # Negative vs positive
+        (-1, 1, 0, "-1 < 1"),
+        (-100, 100, 0, "-100 < 100"),
+        (-1000, 1000, 0, "-1000 < 1000"),
+
+        # Positive vs negative
+        (1, -1, 1, "1 > -1"),
+        (100, -100, 1, "100 > -100"),
+        (1000, -1000, 1, "1000 > -1000"),
+
+        # Negative vs zero
+        (-1, 0, 0, "-1 < 0"),
+        (-100, 0, 0, "-100 < 0"),
+        (-1000, 0, 0, "-1000 < 0"),
+
+        # Zero vs negative
+        (0, -1, 1, "0 > -1"),
+        (0, -100, 1, "0 > -100"),
+        (0, -1000, 1, "0 > -1000"),
+
+        # Large negative values
+        (-2147483647, -2147483648, 1, "-2147483647 > -2147483648"),
+        (-2147483648, -2147483647, 0, "-2147483648 < -2147483647"),
+        (-1000000000, -2000000000, 1, "-1000000000 > -2000000000"),
+
+        # Mixed large values
+        (2147483647, -2147483648, 1, "2147483647 > -2147483648"),
+        (-2147483648, 2147483647, 0, "-2147483648 < 2147483647"),
+    ]
+
+    for i, (data_in, threshold, expected, description) in enumerate(negative_test_vectors):
+        dut.data_in.value = data_in
+        dut.threshold.value = threshold
+        await Timer(10, units="ns")
+
+        actual = int(dut.data_over.value)
+        assert actual == expected, \
+            f"Negative test {i} failed: {description}, expected={expected}, got={actual}"
+
+        dut._log.info(f"✓ Test {i}: {description} -> data_over={actual}")
+
+    dut._log.info("✓ Comprehensive negative values test completed successfully")
 
 
 @cocotb.test()

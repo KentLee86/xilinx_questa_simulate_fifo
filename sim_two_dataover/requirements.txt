@@ -1,0 +1,22 @@
+# cocotb testing framework requirements
+cocotb>=1.8.0
+cocotb-bus>=0.2.1
+
+# Additional testing utilities
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# Waveform analysis (optional)
+# gtkwave can be installed separately via system package manager
+
+# For enhanced logging and debugging
+colorlog>=6.0.0
+
+# For test reporting
+pytest-html>=3.0.0
+pytest-cov>=4.0.0
+
+# Development dependencies (optional)
+# black>=22.0.0
+# flake8>=5.0.0
+# mypy>=1.0.0

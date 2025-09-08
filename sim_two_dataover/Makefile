@@ -1,4 +1,4 @@
-# Dataover cocotb Simulation Makefile
+# Two Dataover cocotb Simulation Makefile
 
 # Cocotb configuration
 export COCOTB_REDUCED_LOG_FMT = 1
@@ -6,13 +6,13 @@ export PYTHONPATH := $(PWD):$(PYTHONPATH)
 
 # Design and testbench files
 TOPLEVEL_LANG = verilog
-VERILOG_SOURCES = $(PWD)/../dataover.v
+VERILOG_SOURCES = $(PWD)/../dataover.v $(PWD)/../two_dataover.v
 
 # Top level module
-TOPLEVEL = dataover
+TOPLEVEL = two_dataover
 
 # Test module
-MODULE = test_dataover
+MODULE = test_two_dataover
 
 # Simulator selection (default: icarus, can be changed to questa, xsim, etc.)
 SIM ?= icarus
@@ -24,7 +24,7 @@ COCOTB_HDL_TIMEPRECISION = 1ps
 
 # Default waveform format for Icarus
 ifeq ($(SIM),icarus)
-    COCOTB_HDL_DUMP_FILE ?= dataover_sim.vcd
+    COCOTB_HDL_DUMP_FILE ?= two_dataover_sim.vcd
 endif
 
 # Additional simulator arguments
@@ -43,6 +43,29 @@ ifeq ($(SIM),xsim)
     SIM_ARGS += --log xsim.log
 endif
 
+# Default target
+all: sim
+
+# Help target
+help:
+	@echo "Available targets:"
+	@echo "  make              - Run simulation with default simulator ($(SIM))"
+	@echo "  make SIM=icarus   - Run with Icarus Verilog"
+	@echo "  make SIM=questa   - Run with Questa/ModelSim"
+	@echo "  make SIM=xsim     - Run with Xilinx Vivado Simulator"
+	@echo "  make clean        - Clean simulation files"
+	@echo "  make help         - Show this help"
+
+.PHONY: all help
 
 # Include cocotb makefiles
 include $(shell cocotb-config --makefiles)/Makefile.sim
+
+# Override clean target after including cocotb makefiles
+clean::
+	@echo "Cleaning up simulation files..."
+	rm -rf __pycache__/
+	rm -f *.vcd *.fst *.wlf *.ghw
+	rm -f results.xml
+	rm -f *.log
+	rm -f dump.vcd

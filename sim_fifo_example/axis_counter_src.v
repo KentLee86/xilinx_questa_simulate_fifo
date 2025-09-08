@@ -54,7 +54,7 @@ module axis_counter_src #(
                 m_axis_tvalid <= 1'b1;
 
                 // 데이터 패턴: {frame_id, beat_cnt}의 하위에 매핑(폭이 다르면 자동 절단)
-                m_axis_tdata  <= {frame_id[15:0], beat_cnt[15:0]};
+                m_axis_tdata  <= {frame_id[23:0], beat_cnt[7:0]};
                 m_axis_tuser  <= {USER_W{1'b0}}; // 필요 시 마킹
 
                 // 프레임 끝(TLAST) 지정

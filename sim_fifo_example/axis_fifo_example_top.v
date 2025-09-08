@@ -102,6 +102,7 @@ module axis_fifo_example_top #(
     end
 
     // Conditional tready logic: m_tready = sink_tready when wait_done goes low after 2 clocks
-    assign m_tready = wait_done_delay[1] ? sink_tready : 1'b0;
+    // assign m_tready = wait_done_delay[1] ? sink_tready : 1'b0;
+    assign m_tready = sink_tready;
 
 endmodule

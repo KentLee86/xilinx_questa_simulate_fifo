@@ -61,11 +61,11 @@ module axis_counter_src #(
                 m_axis_tlast  <= (beat_cnt == (FRAME_BEATS-1));
 
                 if (m_axis_tvalid && m_axis_tready) begin
-                    if (m_axis_tlast) begin
+                    if (beat_cnt == (FRAME_BEATS-1)) begin
                         // Frame complete - start wait period
                         beat_cnt <= 32'd0;
                         frame_id <= frame_id + 1;
-                        waiting  <= 1'b1;
+                        // waiting  <= 1'b1;
                         wait_cnt <= 5'd0;
                     end else begin
                         beat_cnt <= beat_cnt + 1;

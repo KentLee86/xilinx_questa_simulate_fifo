@@ -2,10 +2,13 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Verilog: 시뮬레이션 실행",
+            "label": "dataover: 시뮬레이션 실행",
             "type": "shell",
-            "command": "./setup_env.sh",
-            "args": ["make", "sim"],
+            // "command": "../setup_env.sh",
+            "args": [
+                "SIM=QUESTA"
+            ],
+            "command": "make",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -20,7 +23,50 @@
             },
             "problemMatcher": {
                 "owner": "verilog",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": [
+                    {
+                        "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
+                        "file": 2,
+                        "line": 3,
+                        "severity": 1,
+                        "message": 4
+                    }
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/sim_dataover"
+            }
+        },
+        {
+            "label": "Verilog: 시뮬레이션 실행",
+            "type": "shell",
+            "command": "./setup_env.sh",
+            "args": [
+                "make",
+                "sim"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "verilog",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": [
                     {
                         "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
@@ -39,7 +85,10 @@
             "label": "Verilog: 안전한 시뮬레이션 실행",
             "type": "shell",
             "command": "./setup_env.sh",
-            "args": ["make", "sim-alt"],
+            "args": [
+                "make",
+                "sim-alt"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -51,7 +100,10 @@
             },
             "problemMatcher": {
                 "owner": "verilog",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": [
                     {
                         "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
@@ -70,7 +122,10 @@
             "label": "Verilog: 파형 뷰어로 시뮬레이션",
             "type": "shell",
             "command": "./setup_env.sh",
-            "args": ["make", "wave"],
+            "args": [
+                "make",
+                "wave"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -82,7 +137,10 @@
             },
             "problemMatcher": {
                 "owner": "verilog",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": [
                     {
                         "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
@@ -101,7 +159,10 @@
             "label": "Verilog: Vivado GUI 시뮬레이션",
             "type": "shell",
             "command": "./setup_env.sh",
-            "args": ["make", "gui"],
+            "args": [
+                "make",
+                "gui"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -113,7 +174,10 @@
             },
             "problemMatcher": {
                 "owner": "verilog",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": [
                     {
                         "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
@@ -132,7 +196,10 @@
             "label": "Verilog: Vivado 배치 모드 시뮬레이션",
             "type": "shell",
             "command": "./setup_env.sh",
-            "args": ["make", "batch"],
+            "args": [
+                "make",
+                "batch"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -144,7 +211,10 @@
             },
             "problemMatcher": {
                 "owner": "verilog",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": [
                     {
                         "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
@@ -163,7 +233,10 @@
             "label": "Verilog: 문법 체크",
             "type": "shell",
             "command": "./setup_env.sh",
-            "args": ["make", "check"],
+            "args": [
+                "make",
+                "check"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -175,7 +248,10 @@
             },
             "problemMatcher": {
                 "owner": "verilog",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": [
                     {
                         "regexp": "^(ERROR|WARNING):\\s*\\[\\w+\\s+\\d+-\\d+\\]\\s*\"(.*)\"\\s*Line\\s*(\\d+)\\.\\s*(.*)$",
@@ -194,7 +270,10 @@
             "label": "Verilog: GTKWave 파형 보기",
             "type": "shell",
             "command": "./setup_env.sh",
-            "args": ["make", "gtkwave"],
+            "args": [
+                "make",
+                "gtkwave"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,
@@ -212,7 +291,9 @@
             "label": "Verilog: 정리",
             "type": "shell",
             "command": "make",
-            "args": ["clean"],
+            "args": [
+                "clean"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,

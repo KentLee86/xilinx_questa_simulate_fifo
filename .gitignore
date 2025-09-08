@@ -10,3 +10,11 @@ xvlog*.pb
 *.vcd
 
 xsim.dir/
+
+
+**/work/
+
+*.wlf
+*.mpf
+*.mti
+transcript

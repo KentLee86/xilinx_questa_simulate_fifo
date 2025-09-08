@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
-// ë™ê¸° ê°€ì‚°ê¸° í…ŒìŠ¤íŠ¸ë²¤ì¹˜
+// µ¿±â °¡»ê±â Å×½ºÆ®º¥Ä¡
 
 module tb_sync_adder;
 
-    // íŒŒë¼ë¯¸í„°
+    // ÆÄ¶ó¹ÌÅÍ
     parameter WIDTH = 8;
-    parameter CLK_PERIOD = 10; // 10ns í´ëŸ­ ì£¼ê¸° (100MHz)
+    parameter CLK_PERIOD = 10; // 10ns Å¬·° ÁÖ±â (100MHz)
 
-    // ì‹ í˜¸ ì„ ì–¸
+    // ½ÅÈ£ ¼±¾ğ
     reg                 clk;
     reg                 rst_n;
     reg                 enable;
@@ -17,7 +17,7 @@ module tb_sync_adder;
     wire [WIDTH:0]      sum;
     wire                valid;
 
-    // DUT (Device Under Test) ì¸ìŠ¤í„´ìŠ¤
+    // DUT (Device Under Test) ÀÎ½ºÅÏ½º
     sync_adder #(
         .WIDTH(WIDTH)
     ) dut (
@@ -30,7 +30,7 @@ module tb_sync_adder;
         .valid(valid)
     );
 
-    // í´ëŸ­ ìƒì„± (ì œì–´ ê°€ëŠ¥í•œ ë°©ì‹)
+    // Å¬·° »ı¼º (Á¦¾î °¡´ÉÇÑ ¹æ½Ä)
     reg clk_enable = 1;
 
     initial begin
@@ -40,38 +40,38 @@ module tb_sync_adder;
         end
     end
 
-    // í…ŒìŠ¤íŠ¸ ì‹œë‚˜ë¦¬ì˜¤
+    // Å×½ºÆ® ½Ã³ª¸®¿À
     initial begin
-        // ì´ˆê¸°í™”
+        // ÃÊ±âÈ­
         rst_n = 0;
         enable = 0;
         a = 0;
         b = 0;
 
-        // VCD íŒŒì¼ ìƒì„± (íŒŒí˜• ë¤í”„)
+        // VCD ÆÄÀÏ »ı¼º (ÆÄÇü ´ıÇÁ)
         $dumpfile("sync_adder.vcd");
         $dumpvars(0);
 
-        // ë¦¬ì…‹ í•´ì œ
+        // ¸®¼Â ÇØÁ¦
         #(CLK_PERIOD * 2);
         rst_n = 1;
 
-        // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ 1: ê¸°ë³¸ ë§ì…ˆ
+        // Å×½ºÆ® ÄÉÀÌ½º 1: ±âº» µ¡¼À
         #(CLK_PERIOD);
         enable = 1;
-        a = 8'd5;
+        a = 8'd65;
         b = 8'd55;
         #(CLK_PERIOD);
         $display("Test 1: %d + %d = %d, valid = %b", a, b, sum, valid);
 
-        // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ 2: ì˜¤ë²„í”Œë¡œìš° í…ŒìŠ¤íŠ¸
+        // Å×½ºÆ® ÄÉÀÌ½º 2: ¿À¹öÇÃ·Î¿ì Å×½ºÆ®
         #(CLK_PERIOD);
         a = 8'd200;
         b = 8'd100;
         #(CLK_PERIOD);
         $display("Test 2: %d + %d = %d, valid = %b", a, b, sum, valid);
 
-        // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ 3: enable ë¹„í™œì„±í™”
+        // Å×½ºÆ® ÄÉÀÌ½º 3: enable ºñÈ°¼ºÈ­
         #(CLK_PERIOD);
         enable = 0;
         a = 8'd50;
@@ -79,47 +79,47 @@ module tb_sync_adder;
         #(CLK_PERIOD);
         $display("Test 3 (disabled): %d + %d = %d, valid = %b", a, b, sum, valid);
 
-        // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ 4: enable ì¬í™œì„±í™”
+        // Å×½ºÆ® ÄÉÀÌ½º 4: enable ÀçÈ°¼ºÈ­
         #(CLK_PERIOD);
         enable = 1;
         #(CLK_PERIOD);
         $display("Test 4 (re-enabled): %d + %d = %d, valid = %b", a, b, sum, valid);
 
-        // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ 5: 0 + 0
+        // Å×½ºÆ® ÄÉÀÌ½º 5: 0 + 0
         #(CLK_PERIOD);
         a = 8'd0;
         b = 8'd0;
         #(CLK_PERIOD);
         $display("Test 5: %d + %d = %d, valid = %b", a, b, sum, valid);
 
-        // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤ 6: ìµœëŒ€ê°’ í…ŒìŠ¤íŠ¸
+        // Å×½ºÆ® ÄÉÀÌ½º 6: ÃÖ´ë°ª Å×½ºÆ®
         #(CLK_PERIOD);
         a = 8'd255;
         b = 8'd255;
         #(CLK_PERIOD);
         $display("Test 6: %d + %d = %d, valid = %b", a, b, sum, valid);
 
-        // ë¦¬ì…‹ í…ŒìŠ¤íŠ¸
+        // ¸®¼Â Å×½ºÆ®
         #(CLK_PERIOD);
         rst_n = 0;
         #(CLK_PERIOD);
         $display("Reset test: sum = %d, valid = %b", sum, valid);
 
-        // ì‹œë®¬ë ˆì´ì…˜ ì¢…ë£Œ
+        // ½Ã¹Ä·¹ÀÌ¼Ç Á¾·á
         #(CLK_PERIOD * 2);
-        $display("ì‹œë®¬ë ˆì´ì…˜ ì™„ë£Œ");
+        $display("½Ã¹Ä·¹ÀÌ¼Ç ¿Ï·á");
 
-        // í´ëŸ­ ìƒì„± ì¤‘ì§€
+        // Å¬·° »ı¼º ÁßÁö
         clk_enable = 0;
-        #1; // í´ëŸ­ì´ ì™„ì „íˆ ë©ˆì¶œ ë•Œê¹Œì§€ ì ì‹œ ëŒ€ê¸°
+        #1; // Å¬·°ÀÌ ¿ÏÀüÈ÷ ¸ØÃâ ¶§±îÁö Àá½Ã ´ë±â
 
         $finish;
     end
 
-    // í´ëŸ­ ì—ì§€ì—ì„œ ì¶œë ¥ ëª¨ë‹ˆí„°ë§
+    // Å¬·° ¿¡Áö¿¡¼­ Ãâ·Â ¸ğ´ÏÅÍ¸µ
     always @(posedge clk) begin
         if (rst_n && valid) begin
-            $display("ì‹œê°„ %0t: %d + %d = %d", $time, a, b, sum);
+            $display("½Ã°£ %0t: %d + %d = %d", $time, a, b, sum);
         end
     end
 

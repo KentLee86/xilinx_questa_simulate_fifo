@@ -59,7 +59,7 @@ module tb_sync_adder;
         // 테스트 케이스 1: 기본 덧셈
         #(CLK_PERIOD);
         enable = 1;
-        a = 8'd5;
+        a = 8'd15;
         b = 8'd55;
         #(CLK_PERIOD);
         $display("Test 1: %d + %d = %d, valid = %b", a, b, sum, valid);

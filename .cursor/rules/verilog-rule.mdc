@@ -1,0 +1,67 @@
+---
+globs: *.v
+alwaysApply: false
+---
+
+# Verilog Code Style Rules
+
+## Language
+- All comments and string literals in code must be written in English
+- Use English for all user-facing messages, error messages, and documentation strings
+- Variable names, module names, and identifiers should follow English naming conventions
+
+## Comments
+- Single-line comments (//) should be in English
+- Multi-line comments (/* */) should be in English
+- Module headers and function descriptions should be in English
+
+## String Literals
+- All string literals in Verilog code should be in English
+- This includes display statements ($display), error messages, and any hardcoded text
+
+## Simulation & Testing
+
+### Time Scale
+- Use nanoseconds (ns) as the default time scale unless specifically requested otherwise
+- Include `timescale directive at the top of testbenches and simulation files
+- Format: `` `timescale 1ns/1ps `` (1ns time unit with 1ps precision)
+
+### Testbench Structure
+- Create separate simulation folders for each testbench
+- Testbench files should be placed in dedicated simulation directories
+- Follow naming convention: `sim_[module_name]/` or `[module_name]_sim/`
+
+### Simulator Preference
+- Use Questa (Mentor Graphics/ModelSim) as the default simulator
+- Create run scripts optimized for Questa simulation
+- Include appropriate compilation and simulation commands for Questa
+
+### Testbench Implementation
+- Place testbench files (tb_*.v) in their respective simulation folders
+- Include necessary run scripts (do files, tcl scripts) in the sim folder
+- Organize simulation output files within the sim directory
+
+### Project Structure
+- Place RTL files in the root directory of the project
+- Create dedicated 'tb' subfolder within each simulation directory for testbenches
+- Structure: `sim_[module_name]/tb/` for testbench files
+- Keep design files (*.v) separate from testbench files
+
+### Makefiles
+- Create individual Makefiles in each simulation folder
+- Support both Questa (ModelSim) and XSIM simulators
+- Use common.mk or similar shared makefile for common functionality
+- Minimize duplication by referencing common variables and targets
+
+### Common Makefile Structure
+- Create `common.mk` in the project root or sim folder
+- Define shared variables: simulator paths, common flags, file lists
+- Include common.mk in individual simulation Makefiles
+- Override project-specific variables as needed
+
+## Enforcement
+- Automatically flag any non-English text in comments or string literals
+- Suggest English translations when Korean or other non-English text is detected
+- Maintain code readability and maintainability by using consistent English documentation
+- Validate testbench structure and folder organization
+- Ensure proper time scale directives are included

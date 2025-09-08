@@ -16,7 +16,6 @@
         "**/.Xil": true,
         "**/vivado_project": true,
         "**/*.jou": true,
-        "**/*.log": true,
         "**/*.pb": true,
         "**/webtalk*": true
     },
@@ -25,7 +24,6 @@
         "**/.Xil": true,
         "**/vivado_project": true,
         "**/*.jou": true,
-        "**/*.log": true,
         "**/*.pb": true,
         "**/webtalk*": true
     }

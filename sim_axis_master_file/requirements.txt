@@ -1,0 +1,15 @@
+# cocotb 테스트를 위한 Python 패키지 요구사항
+
+# 코어 cocotb 패키지
+cocotb>=1.8.0
+cocotb-test>=0.2.4
+
+# 추가 유틸리티 패키지
+pytest>=7.0.0
+pytest-xdist>=2.5.0
+numpy>=1.21.0
+matplotlib>=3.5.0
+
+# 개발 도구 (선택사항)
+pytest-cov>=4.0.0
+pytest-html>=3.1.0

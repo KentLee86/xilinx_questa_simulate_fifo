@@ -3,7 +3,7 @@
 
 module axis_master_file_v2 #(
   parameter string  FILE_PATH     = "data.csv",  // 초기 로드 파일
-  parameter string  FILE_TYPE     = "csv",       // "csv" | "bin"
+  parameter string  FILE_TYPE     = "csv_dec",   // "csv_hex" | "csv_dec" | "bin"
   parameter bit     LITTLE_ENDIAN = 1'b1,
   parameter int     DATA_BYTES    = 4            // 32b 고정
 )(
@@ -36,57 +36,73 @@ module axis_master_file_v2 #(
   int unsigned gap_cnt;   // 갭 카운터
 
   // -------- 파일 로더 --------
-  function void load_csv(string path);
+  function void load_csv_hex(string path);
     int fd; string line; word_t w;
     q.delete();
     fd = $fopen(path, "r");
-    if (!fd) $fatal(1, "[axis_v2] CSV open fail: %s", path);
+    if (!fd) $fatal(1, "[axis_v2] CSV hex open fail: %s", path);
     while (!$feof(fd)) begin
       line = "";
       void'($fgets(line, fd));
-      if ($sscanf(line, "%h", w) == 1)      q.push_back(w);
-      else if ($sscanf(line, "%d", w) == 1) q.push_back(w);
+      if ($sscanf(line, "%h", w) == 1) q.push_back(w);
     end
     $fclose(fd);
-    $display("[axis_v2] CSV loaded: %0d words", q.size());
+    $display("[axis_v2] CSV hex loaded: %0d words", q.size());
+  endfunction
+
+  function void load_csv_dec(string path);
+    int fd; string line; word_t w;
+    q.delete();
+    fd = $fopen(path, "r");
+    if (!fd) $fatal(1, "[axis_v2] CSV dec open fail: %s", path);
+    while (!$feof(fd)) begin
+      line = "";
+      void'($fgets(line, fd));
+      if ($sscanf(line, "%d", w) == 1) q.push_back(w);
+    end
+    $fclose(fd);
+    $display("[axis_v2] CSV dec loaded: %0d words", q.size());
   endfunction
 
   function void load_bin(string path, bit little_endian);
-    int fd; int r; byte buf[$]; byte tmp[4096];
+    int fd;
+    int r;
+    byte buffer[$];
+    byte tmp[4096];
+    int words;
+    int i;
+    int base;
+    word_t w;
+
     q.delete();
     fd = $fopen(path, "rb");
     if (!fd) $fatal(1, "[axis_v2] BIN open fail: %s", path);
     do begin
       r = $fread(tmp, fd);
-      for (int i=0;i<r;i++) buf.push_back(tmp[i]);
-    end while (r == tmp.size());
+      for (i=0; i<r; i++) buffer.push_back(tmp[i]);
+    end while (r == $size(tmp));
     $fclose(fd);
     if (DATA_BYTES != 4)  $fatal(1, "DATA_BYTES must be 4 for 32b.");
-    int words = buf.size()/DATA_BYTES;
-    for (int i=0;i<words;i++) begin
-      int base = i*4; word_t w;
-      if (little_endian) w = {buf[base+3],buf[base+2],buf[base+1],buf[base+0]};
-      else               w = {buf[base+0],buf[base+1],buf[base+2],buf[base+3]};
+    words = buffer.size()/DATA_BYTES;
+    for (i=0; i<words; i++) begin
+      base = i*4;
+      if (little_endian) w = {buffer[base+3],buffer[base+2],buffer[base+1],buffer[base+0]};
+      else               w = {buffer[base+0],buffer[base+1],buffer[base+2],buffer[base+3]};
       q.push_back(w);
     end
-    if ((buf.size()%4)!=0)
-      $display("[axis_v2] WARN trailing %0d byte(s) ignored", buf.size()%4);
+    if ((buffer.size()%4)!=0)
+      $display("[axis_v2] WARN trailing %0d byte(s) ignored", buffer.size()%4);
     $display("[axis_v2] BIN loaded: %0d words", q.size());
   endfunction
 
   task automatic reload_file();
-    if (FILE_TYPE == "csv")      load_csv(FILE_PATH);
-    else if (FILE_TYPE == "bin") load_bin(FILE_PATH, LITTLE_ENDIAN);
-    else $fatal(1, "Unknown FILE_TYPE: %s", FILE_TYPE);
+    if (FILE_TYPE == "csv_hex")      load_csv_hex(FILE_PATH);
+    else if (FILE_TYPE == "csv_dec") load_csv_dec(FILE_PATH);
+    else if (FILE_TYPE == "bin")      load_bin(FILE_PATH, LITTLE_ENDIAN);
+    else $fatal(1, "Unknown FILE_TYPE: %s (use csv_hex, csv_dec, or bin)", FILE_TYPE);
   endtask
 
-  // -------- 초기화/리로드 트리거 --------
-  // i_reload는 언제든 펄스 주면 즉시 재적재(전송 중이면 다음 전송부터 새 데이터 사용)
-  // 안전하게 쓰려면 i_pause=1로 멈춘 뒤 i_reload→i_restart→i_pause=0 순서를 추천
-  always @(posedge aclk) if (aresetn && i_reload) begin
-    reload_file();
-    idx <= 0;
-  end
+  // -------- 초기화/리로드 트리거는 메인 always_ff 블록에서 처리 --------
 
   // -------- 메인 시퀀서(FSM-less, 명시적 가드) --------
   typedef enum logic [1:0] {IDLE, SEND, GAP} state_t;
@@ -115,8 +131,8 @@ module axis_master_file_v2 #(
     end else begin
       o_done_pulse <= 1'b0;
 
-      // 즉시 리와인드(언제든)
-      if (i_restart) begin
+      // 즉시 리와인드 또는 리로드 (둘 다 인덱스 리셋)
+      if (i_restart || i_reload) begin
         idx          <= 0;
         state        <= IDLE;
         m_axis_tvalid<= 1'b0;

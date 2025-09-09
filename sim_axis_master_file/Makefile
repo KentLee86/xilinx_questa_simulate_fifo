@@ -13,7 +13,7 @@ MODULE = test_master_file
 
 # 파라미터 설정
 PLUSARGS += +FILE_PATH=data.csv
-PLUSARGS += +FILE_TYPE=csv
+PLUSARGS += +FILE_TYPE=csv_dec    # csv_hex | csv_dec | bin
 PLUSARGS += +LITTLE_ENDIAN=1
 PLUSARGS += +DATA_BYTES=4
 
@@ -35,10 +35,12 @@ ifeq ($(SIM),icarus)
 endif
 
 # 웨이브폼 설정
-WAVES = 1
+WAVES ?= 1
+
 ifeq ($(SIM),questa)
-    SIM_ARGS += -do "add wave -r /*; run -all"
+    SIM_ARGS += -do "run -all"
 endif
+
 
 # 테스트 타임아웃
 COCOTB_TEST_TIMEOUT_DURATION = 10000000

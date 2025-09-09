@@ -19,7 +19,7 @@ PLUSARGS += +DATA_BYTES=4
 
 # 시뮬레이션 옵션
 COMPILE_ARGS += -sv
-COMPILE_ARGS += -timescale=1ns/1ps
+COMPILE_ARGS += -timescale=1ns/1ns
 
 # QuestaSim 특정 설정
 ifeq ($(SIM),questa)
@@ -38,7 +38,7 @@ endif
 WAVES ?= 1
 
 ifeq ($(SIM),questa)
-    SIM_ARGS += -do "run -all"
+    # SIM_ARGS += -do "run -all"
 endif
 
 

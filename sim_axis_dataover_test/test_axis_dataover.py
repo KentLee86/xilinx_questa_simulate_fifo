@@ -362,6 +362,98 @@ async def test_axis_dataover_control_signals(dut):
     dut._log.info("Control signals test passed")
 
 
+@cocotb.test()
+async def test_axis_dataover_csv_direct_comparison(dut):
+    """Test that directly compares DUT output with CSV file contents"""
+    """DUT에서 출력되는 데이터가 CSV 파일의 데이터와 정확히 일치하는지 확인"""
+
+    dut._log.info("Starting CSV direct comparison test")
+
+    # Initialize tester
+    tester = AxisDataoverTester(dut)
+
+    # Load CSV file data directly for comparison
+    csv_filename = "test_data.csv"
+    csv_data = []
+
+    if not os.path.exists(csv_filename):
+        raise TestFailure(f"CSV file {csv_filename} not found")
+
+    with open(csv_filename, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            if row:  # Skip empty rows
+                try:
+                    value = int(row[0])
+                    csv_data.append(value)
+                except ValueError as e:
+                    dut._log.warning(f"Skipping invalid data in CSV: {row[0]} ({e})")
+
+    if not csv_data:
+        raise TestFailure("No valid data found in CSV file")
+
+    dut._log.info(f"Loaded {len(csv_data)} reference values from {csv_filename}")
+    dut._log.info(f"First 5 values: {csv_data[:5]}")
+    dut._log.info(f"Last 5 values: {csv_data[-5:]}")
+
+    # Start clock
+    tester.clock_gen()
+
+    # Reset DUT
+    await tester.reset_dut()
+
+    # Start data transmission
+    await tester.start_data_transmission()
+
+    # Wait for transmission to start
+    while not dut.o_busy.value:
+        await RisingEdge(dut.aclk)
+
+    dut._log.info("Data transmission started - comparing with CSV data")
+
+    # Compare each received data with CSV data
+    comparison_count = 0
+    match_count = 0
+
+    for expected_data in csv_data:
+        # Wait for valid data from DUT
+        while not dut.m_axis_tvalid.value:
+            await RisingEdge(dut.aclk)
+
+        # Get actual data from DUT
+        actual_data = int(dut.m_axis_tdata.value)
+
+        # Compare with CSV data
+        if actual_data != expected_data:
+            raise TestFailure(f"CSV comparison failed at index {comparison_count}: "
+                            f"expected {expected_data}, got {actual_data}")
+
+        comparison_count += 1
+        match_count += 1
+
+        # Log progress for large files (every 50 values)
+        if comparison_count % 50 == 0:
+            dut._log.info(f"✓ Verified {comparison_count}/{len(csv_data)} values")
+
+        # Wait for next data
+        await RisingEdge(dut.aclk)
+
+        # Check if transmission is complete (TLAST)
+        if dut.m_axis_tlast.value:
+            break
+
+    # Wait for transmission to complete
+    while dut.o_busy.value:
+        await RisingEdge(dut.aclk)
+
+    # Verify we received all expected data
+    if comparison_count != len(csv_data):
+        raise TestFailure(f"Incomplete transmission: received {comparison_count}/{len(csv_data)} values")
+
+    dut._log.info(f"CSV direct comparison test PASSED: {match_count}/{len(csv_data)} values matched perfectly")
+    dut._log.info("All DUT output values match the input CSV file contents exactly")
+
+
 if __name__ == "__main__":
     print("Axis Dataover cocotb testbench")
     print("Run with: make cocotb")

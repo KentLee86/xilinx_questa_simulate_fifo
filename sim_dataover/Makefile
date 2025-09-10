@@ -35,7 +35,7 @@ endif
 
 ifeq ($(SIM),questa)
     COMPILE_ARGS += -work work +incdir+$(PWD)/..
-    SIM_ARGS += -t 1ps -voptargs="+acc"
+    SIM_ARGS += -t 1ns -voptargs="+acc"
 endif
 
 ifeq ($(SIM),xsim)

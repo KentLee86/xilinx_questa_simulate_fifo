@@ -1,0 +1,24 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Tue Sep  9 14:49:35 2025
+[*]
+[dumpfile] "/home/wslee/repos/fpga_vsim_cli_test/sim_dataover/my_vcdfile.vcd"
+[dumpfile_mtime] "Tue Sep  9 14:49:18 2025"
+[dumpfile_size] 11357
+[savefile] "/home/wslee/repos/fpga_vsim_cli_test/sim_dataover/vcd.gtkw"
+[timestart] 719
+[size] 1000 600
+[pos] -1 -1
+*-5.000000 294 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 233
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 144
+@22
+#{dataover.data_in[31:0]} dataover.data_in[31] dataover.data_in[30] dataover.data_in[29] dataover.data_in[28] dataover.data_in[27] dataover.data_in[26] dataover.data_in[25] dataover.data_in[24] dataover.data_in[23] dataover.data_in[22] dataover.data_in[21] dataover.data_in[20] dataover.data_in[19] dataover.data_in[18] dataover.data_in[17] dataover.data_in[16] dataover.data_in[15] dataover.data_in[14] dataover.data_in[13] dataover.data_in[12] dataover.data_in[11] dataover.data_in[10] dataover.data_in[9] dataover.data_in[8] dataover.data_in[7] dataover.data_in[6] dataover.data_in[5] dataover.data_in[4] dataover.data_in[3] dataover.data_in[2] dataover.data_in[1] dataover.data_in[0]
+@28
+dataover.data_over
+@22
+#{dataover.threshold[31:0]} dataover.threshold[31] dataover.threshold[30] dataover.threshold[29] dataover.threshold[28] dataover.threshold[27] dataover.threshold[26] dataover.threshold[25] dataover.threshold[24] dataover.threshold[23] dataover.threshold[22] dataover.threshold[21] dataover.threshold[20] dataover.threshold[19] dataover.threshold[18] dataover.threshold[17] dataover.threshold[16] dataover.threshold[15] dataover.threshold[14] dataover.threshold[13] dataover.threshold[12] dataover.threshold[11] dataover.threshold[10] dataover.threshold[9] dataover.threshold[8] dataover.threshold[7] dataover.threshold[6] dataover.threshold[5] dataover.threshold[4] dataover.threshold[3] dataover.threshold[2] dataover.threshold[1] dataover.threshold[0]
+[pattern_trace] 1
+[pattern_trace] 0
